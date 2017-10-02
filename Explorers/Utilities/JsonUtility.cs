@@ -6,23 +6,37 @@ using System.Net;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Security.Cryptography;
+using System.Net.Cache;
 
 namespace WowDotNetAPI.Utilities
 {
     public static class JsonUtility
     {
-        public static string GetJSON(string url)
+        public static string GetJSON(string url, bool clearCache = false)
         {
             HttpWebRequest req = WebRequest.Create(url) as HttpWebRequest;
-            return GetJSON(req);
+            return GetJSON(req, clearCache);
         }
 
-        public static string GetJSON(HttpWebRequest req)
+        public static string GetJSON(HttpWebRequest req, bool clearCache = false)
         {
             try
             {
+                if (clearCache)
+                {
+                    req.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Reload);
+                }
+                else
+                {
+                    req.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.CacheIfAvailable);
+                }
+                    
+
                 HttpWebResponse res = req.GetResponse() as HttpWebResponse;
 
+#if DEBUG
+                Console.WriteLine(String.Format("Cache hit for {0} : {1}", req.RequestUri, res.IsFromCache.ToString()));
+#endif
                 StreamReader streamReader = new StreamReader(res.GetResponseStream(), Encoding.UTF8);
                 return streamReader.ReadToEnd();
             }
