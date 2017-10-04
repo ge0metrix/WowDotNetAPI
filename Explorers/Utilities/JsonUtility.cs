@@ -6,7 +6,6 @@ using System.Net;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Security.Cryptography;
-using System.Net.Cache;
 
 namespace WowDotNetAPI.Utilities
 {
