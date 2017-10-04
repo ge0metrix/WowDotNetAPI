@@ -22,5 +22,12 @@ namespace WowDotNetAPI.Explorers.Test
             Auctions auctions = explorer.GetAuctions("skullcrusher");
             Assert.IsTrue(auctions.CurrentAuctions.Count() > 0);
         }
+
+        [TestMethod]
+        public void Get_AuctionFiles_Data()
+        {
+            AuctionFiles auctionfiles = explorer.GetAuctionFiles("skullcrusher");
+            Assert.IsTrue(auctionfiles.Files.Count() > 0);
+        }
     }
 }
