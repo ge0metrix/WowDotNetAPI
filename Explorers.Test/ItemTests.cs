@@ -71,10 +71,10 @@ namespace WowDotNetAPI.Explorers.Test
 
             Assert.AreEqual("CREATED_BY_SPELL", sampleItem.ItemSource.SourceType);
 
-            Assert.AreEqual(3.7, sampleItem.WeaponInfo.WeaponSpeed);
+            Assert.AreEqual(3.6, sampleItem.WeaponInfo.WeaponSpeed);
 
             Assert.AreEqual(19, sampleItem.BonusStats.ElementAt(2).Amount);
-            Assert.AreEqual("Hurls a fiery ball that causes ^7.7376 Fire damage and an additional ^1.9145 damage over 10 sec.",
+            Assert.AreEqual("Hurls a fiery ball that causes ^6.5870 Fire damage and an additional ^1.6300 damage over 10 sec.",
                 sampleItem.ItemSpells.First().Spell.Description);
         }
 
