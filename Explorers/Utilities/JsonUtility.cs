@@ -12,31 +12,18 @@ namespace WowDotNetAPI.Utilities
 {
     public static class JsonUtility
     {
-        public static string GetJSON(string url, bool clearCache = false)
+        public static string GetJSON(string url)
         {
             HttpWebRequest req = WebRequest.Create(url) as HttpWebRequest;
-            return GetJSON(req, clearCache);
+            return GetJSON(req);
         }
 
-        public static string GetJSON(HttpWebRequest req, bool clearCache = false)
+        public static string GetJSON(HttpWebRequest req)
         {
             try
             {
-                if (clearCache)
-                {
-                    req.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Reload);
-                }
-                else
-                {
-                    req.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.CacheIfAvailable);
-                }
-                    
-
                 HttpWebResponse res = req.GetResponse() as HttpWebResponse;
 
-#if DEBUG
-                Console.WriteLine(String.Format("Cache hit for {0} : {1}", req.RequestUri, res.IsFromCache.ToString()));
-#endif
                 StreamReader streamReader = new StreamReader(res.GetResponseStream(), Encoding.UTF8);
                 return streamReader.ReadToEnd();
             }
