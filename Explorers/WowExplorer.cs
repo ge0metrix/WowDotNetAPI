@@ -323,6 +323,22 @@ namespace WowDotNetAPI
             return null;
         }
 
+        public AuctionFiles GetAuctionFiles(string realm)
+        {
+            AuctionFiles auctionFiles;
+
+            TryGetData<AuctionFiles>(
+                string.Format(@"{0}/wow/auction/data/{1}?locale={2}&apikey={3}", Host, realm.ToLower().Replace(' ', '-'), Locale, APIKey),
+                out auctionFiles);
+
+            if (auctionFiles != null)
+            {
+                return auctionFiles;
+            }
+            return null;
+        }
+
+
         #endregion
 
         #region Items
