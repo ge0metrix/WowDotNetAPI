@@ -35,6 +35,7 @@ namespace WowDotNetAPI
         IEnumerable<Realm> GetRealms();
 
         Auctions GetAuctions(string realm);
+        AuctionFiles GetAuctionFiles(string realm);
 
         Item GetItem(int id);
 
